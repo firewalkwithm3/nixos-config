@@ -1,0 +1,5 @@
+{
+  imports = [
+    ../roles/laptop.nix
+  ];
+}

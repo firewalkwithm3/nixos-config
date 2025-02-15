@@ -1,0 +1,5 @@
+{
+  imports = [
+    ../roles/server.nix
+  ];
+}
