@@ -1,4 +1,9 @@
 name: update-flake-lock
+
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   workflow_dispatch:
   schedule:
@@ -20,8 +25,6 @@ jobs:
           pr-labels: |
             dependencies
             automated
-      - name: Merge pull request
+      - name: Merge pull requess
         run: "gh pr merge --delete-branch --disable-auto --merge ${{ steps.update.outputs.pull-request-number }}"
-        env:
-          GH_TOKEN: ${{ github.token }}
         if: ${{ steps.update.outputs.pull-request-number != '' }}
