@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -12,7 +11,7 @@
   system.autoUpgrade = {
     enable = true;
     dates = "3:00";
-    flake = "github:firewalkwithm3/nixos-config";
+    flake = "github:firewalkwithm3/nix";
   };
 
   # Cleanup old generations
