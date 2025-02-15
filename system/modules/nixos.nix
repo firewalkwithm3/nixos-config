@@ -5,6 +5,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Allow rebuilding remote hosts
+  nix.settings.trusted-users = [ "fern" ];
+
   # Auto-upgrade
   systemd.extraConfig = "DefaultLimitNOFILE=2048";
 
