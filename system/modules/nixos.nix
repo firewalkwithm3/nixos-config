@@ -7,18 +7,12 @@
   nixpkgs.config.allowUnfree = true;
 
   # Auto-upgrade
-  age.secrets.github.rekeyFile = ../../secrets/github.age;
-
-  nix.extraOptions = ''
-    !include ${config.age.secrets.github.path}
-  '';
-
   systemd.extraConfig = "DefaultLimitNOFILE=2048";
 
   system.autoUpgrade = {
     enable = true;
     dates = "3:00";
-    flake = "github:firewalkwithm3/nix";
+    flake = "github:firewalkwithm3/nixos-config";
   };
 
   # Cleanup old generations
