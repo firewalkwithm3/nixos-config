@@ -19,11 +19,11 @@
   };
 
   services.caddy.virtualHosts."invidious.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:3002
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:3002
+      	  '';
   };
 }

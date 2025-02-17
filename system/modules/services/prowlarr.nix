@@ -1,4 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.prowlarr = {
     enable = true;
@@ -14,11 +19,11 @@
   };
 
   services.caddy.virtualHosts."prowlarr.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:9000
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:9000
+      	  '';
   };
 }

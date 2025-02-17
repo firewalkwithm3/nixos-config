@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   age.secrets = {
@@ -26,29 +31,40 @@
       dbtype = "pgsql";
     };
     settings = {
-	    overwriteprotocol = "https";
-	    overwritehost = "cloud.ferngarden.net";
-	    trusted_domains = [ "cloud.ferngarden.net" ];
-	    trusted_proxies = [ "127.0.0.1" ];
+      overwriteprotocol = "https";
+      overwritehost = "cloud.ferngarden.net";
+      trusted_domains = [ "cloud.ferngarden.net" ];
+      trusted_proxies = [ "127.0.0.1" ];
       defaultPhoneRegion = "AU";
     };
     autoUpdateApps.enable = true;
     appstoreEnable = true;
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) bookmarks calendar contacts tasks user_oidc;
+      inherit (config.services.nextcloud.package.packages.apps)
+        bookmarks
+        calendar
+        contacts
+        tasks
+        user_oidc
+        ;
     };
     extraAppsEnable = true;
   };
 
   # run on a different port
-  services.nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 8082; } ];
+  services.nginx.virtualHosts."localhost".listen = [
+    {
+      addr = "127.0.0.1";
+      port = 8082;
+    }
+  ];
 
   services.caddy.virtualHosts."cloud.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:8082
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:8082
+      	  '';
   };
 }

@@ -11,6 +11,12 @@
   fileSystems."/mnt/onedrive" = {
     device = "onedrive:/";
     fsType = "rclone";
-    options = [ "nodev" "nofail" "allow_other" "args2env" "config=/etc/rclone.conf" ];
+    options = [
+      "nodev"
+      "nofail"
+      "allow_other"
+      "args2env"
+      "config=/etc/rclone.conf"
+    ];
   };
 }

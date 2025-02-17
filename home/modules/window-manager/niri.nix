@@ -1,108 +1,162 @@
-{ pkgs, config, ... }: let
+{ pkgs, config, ... }:
+let
   power-menu = pkgs.writeShellScript "fuzzel-power-menu.sh" ''
-		#!/bin/bash
+    		#!/bin/bash
 
-		SELECTION="$(printf "󰶐  Turn off displays\n󰌾  Lock\n󰤄  Suspend\n󰍃  Log out\n󰜉  Reboot\n󰐥  Shutdown" | fuzzel --dmenu -l 6 -p "Power Menu: ")"
+    		SELECTION="$(printf "󰶐  Turn off displays\n󰌾  Lock\n󰤄  Suspend\n󰍃  Log out\n󰜉  Reboot\n󰐥  Shutdown" | fuzzel --dmenu -l 6 -p "Power Menu: ")"
 
-		case $SELECTION in
-      *"Turn off displays")
-        ${pkgs.niri-stable}/bin/niri msg action power-off-monitors;;
-			*"Lock")
-				${pkgs.gtklock}/bin/gtklock -d;;
-			*"Suspend")
-				${pkgs.systemd}/bin/systemctl suspend;;
-			*"Log out")
-				${pkgs.niri-stable}/bin/niri msg action quit;;
-			*"Reboot")
-				${pkgs.systemd}/bin/systemctl reboot;;
-			*"Shutdown")
-				${pkgs.systemd}/bin/systemctl poweroff;;
-		esac
+    		case $SELECTION in
+          *"Turn off displays")
+            ${pkgs.niri-stable}/bin/niri msg action power-off-monitors;;
+    			*"Lock")
+    				${pkgs.gtklock}/bin/gtklock -d;;
+    			*"Suspend")
+    				${pkgs.systemd}/bin/systemctl suspend;;
+    			*"Log out")
+    				${pkgs.niri-stable}/bin/niri msg action quit;;
+    			*"Reboot")
+    				${pkgs.systemd}/bin/systemctl reboot;;
+    			*"Shutdown")
+    				${pkgs.systemd}/bin/systemctl poweroff;;
+    		esac
   '';
-in {
+in
+{
   programs.niri.settings = {
     binds = {
-      "Mod+Shift+Slash".action.show-hotkey-overlay = {};
+      "Mod+Shift+Slash".action.show-hotkey-overlay = { };
 
       "Mod+Return".action.spawn = "${pkgs.kitty}/bin/kitty";
 
       "Mod+Space".action.spawn = "${pkgs.fuzzel}/bin/fuzzel";
-      "Mod+E".action.spawn = ["${pkgs.bemoji}/bin/bemoji" "-t" "-c" "-n" ];
+      "Mod+E".action.spawn = [
+        "${pkgs.bemoji}/bin/bemoji"
+        "-t"
+        "-c"
+        "-n"
+      ];
 
-      "Super+Alt+L".action.spawn = [ "${pkgs.gtklock}/bin/gtklock" "-d" ];
+      "Super+Alt+L".action.spawn = [
+        "${pkgs.gtklock}/bin/gtklock"
+        "-d"
+      ];
       "Mod+Shift+E".action.spawn = "${power-menu}";
 
-      "Mod+P".action.screenshot-screen = {};
-      "Mod+Shift+P".action.screenshot = {};
-      "Mod+Ctrl+P".action.screenshot-window = {};
+      "Mod+P".action.screenshot-screen = { };
+      "Mod+Shift+P".action.screenshot = { };
+      "Mod+Ctrl+P".action.screenshot-window = { };
 
       "XF86AudioRaiseVolume" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.wireplumber}/bin/wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%+" ];
+        action.spawn = [
+          "${pkgs.wireplumber}/bin/wpctl"
+          "set-volume"
+          "@DEFAULT_AUDIO_SINK@"
+          "1%+"
+        ];
       };
       "XF86AudioLowerVolume" = {
         allow-when-locked = true;
-        action.spawn = ["${pkgs.wireplumber}/bin/wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "1%-"];
+        action.spawn = [
+          "${pkgs.wireplumber}/bin/wpctl"
+          "set-volume"
+          "@DEFAULT_AUDIO_SINK@"
+          "1%-"
+        ];
       };
       "XF86AudioMute" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.wireplumber}/bin/wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
+        action.spawn = [
+          "${pkgs.wireplumber}/bin/wpctl"
+          "set-mute"
+          "@DEFAULT_AUDIO_SINK@"
+          "toggle"
+        ];
       };
       "XF86AudioMicMute" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.wireplumber}/bin/wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
+        action.spawn = [
+          "${pkgs.wireplumber}/bin/wpctl"
+          "set-mute"
+          "@DEFAULT_AUDIO_SOURCE@"
+          "toggle"
+        ];
       };
 
       "XF86AudioPlay" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.playerctl}/bin/playerctl" "play-pause" ];
+        action.spawn = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "play-pause"
+        ];
       };
       "XF86AudioRewind" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.playerctl}/bin/playerctl" "previous" ];
+        action.spawn = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "previous"
+        ];
       };
       "XF86AudioForward" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.playerctl}/bin/playerctl" "next" ];
+        action.spawn = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "next"
+        ];
       };
 
       "XF86MonBrightnessDown" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.brillo}/bin/brillo" "-el" "-U" "5" ];
+        action.spawn = [
+          "${pkgs.brillo}/bin/brillo"
+          "-el"
+          "-U"
+          "5"
+        ];
       };
       "XF86MonBrightnessUp" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.brillo}/bin/brillo" "-el" "-A" "5" ];
+        action.spawn = [
+          "${pkgs.brillo}/bin/brillo"
+          "-el"
+          "-A"
+          "5"
+        ];
       };
       "XF86Tools" = {
         allow-when-locked = true;
-        action.spawn = [ "${pkgs.brillo}/bin/brillo" "-el" "-S" "100" ];
+        action.spawn = [
+          "${pkgs.brillo}/bin/brillo"
+          "-el"
+          "-S"
+          "100"
+        ];
       };
 
       "XF86Display" = {
         action.spawn = "${pkgs.wdisplays}/bin/wdisplays";
       };
 
-      "Mod+Q".action.close-window = {};
+      "Mod+Q".action.close-window = { };
 
-      "Mod+H".action.focus-column-or-monitor-left = {};
-      "Mod+J".action.focus-window-down = {};
-      "Mod+K".action.focus-window-up = {};
-      "Mod+L".action.focus-column-or-monitor-right = {};
+      "Mod+H".action.focus-column-or-monitor-left = { };
+      "Mod+J".action.focus-window-down = { };
+      "Mod+K".action.focus-window-up = { };
+      "Mod+L".action.focus-column-or-monitor-right = { };
 
-      "Mod+Shift+H".action.move-column-left-or-to-monitor-left = {};
-      "Mod+Shift+J".action.move-window-down-or-to-workspace-down = {};
-      "Mod+Shift+K".action.move-window-up-or-to-workspace-up = {};
-      "Mod+Shift+L".action.move-column-right-or-to-monitor-right = {};
+      "Mod+Shift+H".action.move-column-left-or-to-monitor-left = { };
+      "Mod+Shift+J".action.move-window-down-or-to-workspace-down = { };
+      "Mod+Shift+K".action.move-window-up-or-to-workspace-up = { };
+      "Mod+Shift+L".action.move-column-right-or-to-monitor-right = { };
 
-      "Mod+Tab".action.focus-monitor-next = {};
+      "Mod+Tab".action.focus-monitor-next = { };
 
-      "Mod+U".action.focus-workspace-down = {};
-      "Mod+I".action.focus-workspace-up = {};
+      "Mod+U".action.focus-workspace-down = { };
+      "Mod+I".action.focus-workspace-up = { };
 
-      "Mod+Shift+U".action.move-workspace-down = {};
-      "Mod+Shift+I".action.move-workspace-up = {};
-      "Mod+Shift+Tab".action.move-workspace-to-monitor-next = {};
+      "Mod+Shift+U".action.move-workspace-down = { };
+      "Mod+Shift+I".action.move-workspace-up = { };
+      "Mod+Shift+Tab".action.move-workspace-to-monitor-next = { };
 
       "Mod+1".action.focus-workspace = 1;
       "Mod+2".action.focus-workspace = 2;
@@ -126,16 +180,16 @@ in {
       "Mod+Shift+9".action.move-column-to-workspace = 9;
       "Mod+Shift+0".action.move-column-to-workspace = 10;
 
-      "Mod+BracketLeft".action.consume-or-expel-window-left = {};
-      "Mod+BracketRight".action.consume-or-expel-window-right = {};
-      "Mod+Comma".action.consume-window-into-column = {};
-      "Mod+Period".action.expel-window-from-column = {};
+      "Mod+BracketLeft".action.consume-or-expel-window-left = { };
+      "Mod+BracketRight".action.consume-or-expel-window-right = { };
+      "Mod+Comma".action.consume-window-into-column = { };
+      "Mod+Period".action.expel-window-from-column = { };
 
-      "Mod+R".action.switch-preset-column-width = {};
-      "Mod+Shift+R".action.reset-window-height = {};
-      "Mod+F".action.maximize-column = {};
-      "Mod+Shift+F".action.fullscreen-window = {};
-      "Mod+C".action.center-column = {};
+      "Mod+R".action.switch-preset-column-width = { };
+      "Mod+Shift+R".action.reset-window-height = { };
+      "Mod+F".action.maximize-column = { };
+      "Mod+Shift+F".action.fullscreen-window = { };
+      "Mod+C".action.center-column = { };
 
       "Mod+Minus".action.set-column-width = "-10%";
       "Mod+Equal".action.set-column-width = "+10%";
@@ -143,7 +197,7 @@ in {
       "Mod+Shift+Minus".action.set-window-height = "-10%";
       "Mod+Shift+Equal".action.set-window-height = "+10%";
 
-      "Mod+Shift+Space".action.toggle-window-floating = {};
+      "Mod+Shift+Space".action.toggle-window-floating = { };
 
     };
 
@@ -153,7 +207,15 @@ in {
 
     spawn-at-startup = [
       { command = [ "${pkgs.xwayland-satellite-stable}/bin/xwayland-satellite" ]; }
-      { command = [ "${pkgs.swaybg}/bin/swaybg" "-o" "*" "-i" "${config.stylix.image}" ]; }
+      {
+        command = [
+          "${pkgs.swaybg}/bin/swaybg"
+          "-o"
+          "*"
+          "-i"
+          "${config.stylix.image}"
+        ];
+      }
       { command = [ "${config.programs.firefox.finalPackage}/bin/firefox" ]; }
       { command = [ "${pkgs.fluffychat}/bin/fluffychat" ]; }
       { command = [ "${pkgs.signal-desktop}/bin/signal-desktop" ]; }
@@ -203,7 +265,7 @@ in {
         { proportion = 1. / 2.; }
         { proportion = 2. / 3.; }
       ];
-     gaps = 6;
+      gaps = 6;
     };
 
     environment = {
@@ -214,35 +276,35 @@ in {
 
     window-rules = [
       {
-        matches = [ { app-id = "firefox";} ];
+        matches = [ { app-id = "firefox"; } ];
         open-on-workspace = "browser";
         open-maximized = true;
       }
       {
         matches = [
-          { app-id = "libreoffice-*";}
-          { app-id = "Gimp-*";}
+          { app-id = "libreoffice-*"; }
+          { app-id = "Gimp-*"; }
         ];
         open-on-workspace = "work";
         open-maximized = true;
       }
       {
-        matches = [ { app-id = "org.prismlauncher.PrismLauncher";} ];
+        matches = [ { app-id = "org.prismlauncher.PrismLauncher"; } ];
         open-on-workspace = "games";
         open-maximized = true;
       }
       {
         matches = [
-          { app-id = "com.github.iwalton3.jellyfin-media-player";}
-          { app-id = "feishin";}
+          { app-id = "com.github.iwalton3.jellyfin-media-player"; }
+          { app-id = "feishin"; }
         ];
         open-on-workspace = "media";
         open-maximized = true;
       }
       {
         matches = [
-          { app-id = "fluffychat";}
-          { app-id = "Signal";}
+          { app-id = "fluffychat"; }
+          { app-id = "Signal"; }
         ];
         open-on-workspace = "chat";
         open-maximized = true;

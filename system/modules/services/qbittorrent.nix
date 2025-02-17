@@ -25,7 +25,7 @@
         "/mnt/volume3:/mnt/volume3"
       ];
     };
-  };  
+  };
 
   virtualisation.oci-containers = {
     containers.qsticky = {
@@ -42,7 +42,7 @@
       };
       extraOptions = [ "--pull=newer" ];
     };
-  };  
+  };
 
   virtualisation.oci-containers = {
     containers.seedboxapi = {
@@ -58,15 +58,15 @@
         DEBUG = "1";
         interval = "1";
       };
-    };  
+    };
   };
 
   services.caddy.virtualHosts."qbittorrent.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy http://127.0.0.1:5001
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy http://127.0.0.1:5001
+      	  '';
   };
 }

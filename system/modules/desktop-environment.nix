@@ -1,4 +1,9 @@
-{ inputs, lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Login manager
   services.xserver.displayManager.gdm.enable = true;
@@ -11,7 +16,7 @@
   };
 
   systemd.user.services.niri-flake-polkit = {
-    wants = lib.mkForce [];
+    wants = lib.mkForce [ ];
     requisite = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
   };

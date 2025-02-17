@@ -23,11 +23,11 @@
   };
 
   services.caddy.virtualHosts."vault.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:8087
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:8087
+      	  '';
   };
 }

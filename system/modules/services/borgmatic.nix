@@ -70,14 +70,16 @@
           "/var/lib/radarr"
           "/var/lib/sonarr"
         ];
-        postgresql_databases = [{
-          name = "all";
-          format = "custom";
-          username = "postgres";
-          pg_dump_command = "${pkgs.postgresql_16}/bin/pg_dump";
-          psql_command = "${pkgs.postgresql_16}/bin/psql";
-          pg_restore_command = "${pkgs.postgresql_16}/bin/pg_restore";
-        }];
+        postgresql_databases = [
+          {
+            name = "all";
+            format = "custom";
+            username = "postgres";
+            pg_dump_command = "${pkgs.postgresql_16}/bin/pg_dump";
+            psql_command = "${pkgs.postgresql_16}/bin/psql";
+            pg_restore_command = "${pkgs.postgresql_16}/bin/pg_restore";
+          }
+        ];
         sqlite_databases = [
           {
             name = "audiobookshelf";
@@ -85,107 +87,107 @@
           }
           {
             name = "bazarr";
-	          path = "/var/lib/bazarr/db/bazarr.db";
+            path = "/var/lib/bazarr/db/bazarr.db";
           }
           {
             name = "calibre-server";
-	          path = "/var/lib/calibre-server/users.sqlite";
+            path = "/var/lib/calibre-server/users.sqlite";
           }
           {
             name = "calibre-web-app";
-	          path = "/var/lib/calibre-web/app.db";
+            path = "/var/lib/calibre-web/app.db";
           }
           {
             name = "calibre-web-gdrive";
-	          path = "/var/lib/calibre-web/gdrive.db";
+            path = "/var/lib/calibre-web/gdrive.db";
           }
           {
             name = "homeassistant-zigbee";
-	          path = "/var/lib/containers/storage/volumes/hass/_data/zigbee.db";
+            path = "/var/lib/containers/storage/volumes/hass/_data/zigbee.db";
           }
           {
             name = "homeassistant";
-	          path = "/var/lib/containers/storage/volumes/hass/_data/home-assistant_v2.db";
+            path = "/var/lib/containers/storage/volumes/hass/_data/home-assistant_v2.db";
           }
           {
             name = "memos";
-	          path = "/var/lib/containers/storage/volumes/memos/_data/memos_prod.db";
+            path = "/var/lib/containers/storage/volumes/memos/_data/memos_prod.db";
           }
           {
             name = "lurker";
-	          path = "/lurker.db";
+            path = "/lurker.db";
           }
           {
             name = "wallos";
-	          path = "/var/lib/containers/storage/volumes/wallos-db/_data/wallos.db";
+            path = "/var/lib/containers/storage/volumes/wallos-db/_data/wallos.db";
           }
           {
             name = "jellyfin";
-	          path = "/var/lib/jellyfin/data/jellyfin.db";
+            path = "/var/lib/jellyfin/data/jellyfin.db";
           }
           {
             name = "jellyfin-library";
-	          path = "/var/lib/jellyfin/data/library.db";
+            path = "/var/lib/jellyfin/data/library.db";
           }
           {
             name = "jellyfin-playback_reporting";
-	          path = "/var/lib/jellyfin/data/playback_reporting.db";
+            path = "/var/lib/jellyfin/data/playback_reporting.db";
           }
           {
             name = "jellyseerr";
-	          path = "/var/lib/jellyseerr/db/db.sqlite3";
+            path = "/var/lib/jellyseerr/db/db.sqlite3";
           }
           {
             name = "lidarr";
-	          path = "/var/lib/lidarr/.config/Lidarr/lidarr.db";
+            path = "/var/lib/lidarr/.config/Lidarr/lidarr.db";
           }
           {
             name = "lidarr-logs";
-	          path = "/var/lib/lidarr/.config/Lidarr/logs.db";
+            path = "/var/lib/lidarr/.config/Lidarr/logs.db";
           }
           {
             name = "navidrome";
-	          path = "/var/lib/navidrome/navidrome.db";
+            path = "/var/lib/navidrome/navidrome.db";
           }
           {
             name = "readarr-audio";
-	          path = "/var/lib/nixos-containers/readarr-audio/var/lib/readarr/readarr.db";
+            path = "/var/lib/nixos-containers/readarr-audio/var/lib/readarr/readarr.db";
           }
           {
             name = "readarr-audio-logs";
-	          path = "/var/lib/nixos-containers/readarr-audio/var/lib/readarr/logs.db";
+            path = "/var/lib/nixos-containers/readarr-audio/var/lib/readarr/logs.db";
           }
           {
             name = "readarr-ebook";
-	          path = "/var/lib/nixos-containers/readarr-ebook/var/lib/readarr/readarr.db";
+            path = "/var/lib/nixos-containers/readarr-ebook/var/lib/readarr/readarr.db";
           }
           {
             name = "readarr-ebook-logs";
-	          path = "/var/lib/nixos-containers/readarr-ebook/var/lib/readarr/logs.db";
+            path = "/var/lib/nixos-containers/readarr-ebook/var/lib/readarr/logs.db";
           }
           {
             name = "prowlarr";
-	          path = "/var/lib/prowlarr/prowlarr.db";
+            path = "/var/lib/prowlarr/prowlarr.db";
           }
           {
             name = "prowlarr-logs";
-	          path = "/var/lib/prowlarr/logs.db";
+            path = "/var/lib/prowlarr/logs.db";
           }
           {
             name = "radarr";
-	          path = "/var/lib/radarr/.config/Radarr/radarr.db";
+            path = "/var/lib/radarr/.config/Radarr/radarr.db";
           }
           {
             name = "radarr-logs";
-	          path = "/var/lib/radarr/.config/Radarr/logs.db";
+            path = "/var/lib/radarr/.config/Radarr/logs.db";
           }
           {
             name = "sonarr";
-	          path = "/var/lib/sonarr/.config/NzbDrone/sonarr.db";
+            path = "/var/lib/sonarr/.config/NzbDrone/sonarr.db";
           }
           {
             name = "sonarr-logs";
-	          path = "/var/lib/sonarr/.config/NzbDrone/logs.db";
+            path = "/var/lib/sonarr/.config/NzbDrone/logs.db";
           }
         ];
         repositories = [

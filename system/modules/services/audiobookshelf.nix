@@ -11,9 +11,9 @@
     logFormat = lib.mkForce ''
       output file ${config.services.caddy.logDir}/fern_garden.log { mode 0644 }
     '';
-	  extraConfig = ''
-      route { crowdsec }
-	    reverse_proxy 127.0.0.1:8081
-	  '';
+    extraConfig = ''
+            route { crowdsec }
+      	    reverse_proxy 127.0.0.1:8081
+      	  '';
   };
 }

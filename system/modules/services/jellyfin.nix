@@ -1,11 +1,16 @@
-{ pkgs, config, lib, ... }:
 {
-  networking.firewall. allowedTCPPorts = [ 8096 ];
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
+  networking.firewall.allowedTCPPorts = [ 8096 ];
 
-  nixpkgs.overlays = with pkgs; [(
-    final: prev:
-      {
-        jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
+  nixpkgs.overlays = with pkgs; [
+    (final: prev: {
+      jellyfin-web = prev.jellyfin-web.overrideAttrs (
+        finalAttrs: previousAttrs: {
           installPhase = ''
             runHook preInstall
 
@@ -17,22 +22,23 @@
 
             runHook postInstall
           '';
-        });
-      }
-  )];
+        }
+      );
+    })
+  ];
 
   services.jellyfin = {
     enable = true;
     group = "media";
   };
 
-  services.caddy.virtualHosts."jellyfin.fern.garden"= {
+  services.caddy.virtualHosts."jellyfin.fern.garden" = {
     logFormat = lib.mkForce ''
       output file ${config.services.caddy.logDir}/fern_garden.log { mode 0644 }
     '';
-	  extraConfig = ''
-      route { crowdsec }
-	    reverse_proxy 127.0.0.1:8096
-	  '';
+    extraConfig = ''
+            route { crowdsec }
+      	    reverse_proxy 127.0.0.1:8096
+      	  '';
   };
 }

@@ -16,11 +16,11 @@
   };
 
   services.caddy.virtualHosts."rss.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:8083
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:8083
+      	  '';
   };
 }

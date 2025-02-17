@@ -1,9 +1,16 @@
+{ pkgs, ... }:
 {
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Formatter
+  environment.systemPackages = [ pkgs.nixfmt-rfc-style ];
 
   # Allow rebuilding remote hosts
   nix.settings.trusted-users = [ "fern" ];

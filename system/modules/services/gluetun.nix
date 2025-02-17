@@ -1,4 +1,4 @@
-{ config, ...}:
+{ config, ... }:
 {
   age.secrets.gluetun-config.rekeyFile = ../../../secrets/services/gluetun-config.age;
   age.secrets.protonvpn.rekeyFile = ../../../secrets/services/protonvpn.age;

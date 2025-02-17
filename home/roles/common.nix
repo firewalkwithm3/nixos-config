@@ -10,7 +10,7 @@
     # Shell Programs
     ../modules/shell/tmux.nix
     ../modules/shell/fish.nix
-    ../modules/shell/helix.nix
+    ../modules/shell/nixvim.nix
     ../modules/shell/git.nix
     ../modules/shell/aria2.nix
     ../modules/shell/misc.nix

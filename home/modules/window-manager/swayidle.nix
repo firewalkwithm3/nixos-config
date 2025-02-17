@@ -4,7 +4,17 @@
 
   services.swayidle = {
     enable = true;
-    events = [{ event = "before-sleep"; command = "${pkgs.gtklock}/bin/gtklock -d"; }];
-    timeouts = [{ timeout = 300; command = "${pkgs.gtklock}/bin/gtklock -d"; }];
+    events = [
+      {
+        event = "before-sleep";
+        command = "${pkgs.gtklock}/bin/gtklock -d";
+      }
+    ];
+    timeouts = [
+      {
+        timeout = 300;
+        command = "${pkgs.gtklock}/bin/gtklock -d";
+      }
+    ];
   };
 }

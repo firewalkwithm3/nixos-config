@@ -7,12 +7,12 @@
   };
 
   services.caddy.virtualHosts."esphome.ferngarden.net" = {
-	  logFormat = lib.mkForce ''
-	    output discard
-	  '';
-	  extraConfig = ''
-      route { crowdsec }
-	    reverse_proxy 127.0.0.1:6052
-	  '';
+    logFormat = lib.mkForce ''
+      	    output discard
+      	  '';
+    extraConfig = ''
+            route { crowdsec }
+      	    reverse_proxy 127.0.0.1:6052
+      	  '';
   };
 }

@@ -1,7 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   # Enable Yubikey support
-  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
+  services.udev.packages = [
+    pkgs.yubikey-personalization
+    pkgs.libu2f-host
+  ];
   services.pcscd.enable = true;
 
   # Yubikey integrations
@@ -41,7 +49,7 @@
     rekeyFile = ../../secrets/u2f_keys.age;
     owner = "fern";
   };
-  
+
   security.pam.u2f = {
     enable = true;
     settings = {

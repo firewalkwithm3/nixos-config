@@ -1,4 +1,9 @@
-{ config, inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   nixpkgs.overlays = [ inputs.crowdsec.overlays.default ];
 
@@ -15,21 +20,27 @@
     };
   };
 
-  systemd.services.crowdsec-firewall-bouncer.serviceConfig.EnvironmentFile = [ config.age.secrets.crowdsec-bouncer.path ];
-  systemd.services.crowdsec.serviceConfig.EnvironmentFile = [ config.age.secrets.crowdsec-bouncer.path ];
+  systemd.services.crowdsec-firewall-bouncer.serviceConfig.EnvironmentFile = [
+    config.age.secrets.crowdsec-bouncer.path
+  ];
+  systemd.services.crowdsec.serviceConfig.EnvironmentFile = [
+    config.age.secrets.crowdsec-bouncer.path
+  ];
 
   systemd.services.crowdsec.serviceConfig = {
-    ExecStartPre = let
-      script = pkgs.writeScriptBin "register-bouncer" ''
-        #!${pkgs.runtimeShell}
-        set -eu
-        set -o pipefail
+    ExecStartPre =
+      let
+        script = pkgs.writeScriptBin "register-bouncer" ''
+          #!${pkgs.runtimeShell}
+          set -eu
+          set -o pipefail
 
-        if ! cscli bouncers list | grep -q "caddy"; then
-          cscli bouncers add "caddy" --key "''${API_KEY}"
-        fi
-      '';
-    in ["${script}/bin/register-bouncer"];
+          if ! cscli bouncers list | grep -q "caddy"; then
+            cscli bouncers add "caddy" --key "''${API_KEY}"
+          fi
+        '';
+      in
+      [ "${script}/bin/register-bouncer" ];
   };
 
   services.crowdsec = {

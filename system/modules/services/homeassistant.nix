@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  networking.firewall. allowedTCPPorts = [ 8123 ];
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 
   virtualisation.oci-containers = {
     containers.homeassistant = {
@@ -33,8 +33,8 @@
     logFormat = lib.mkForce ''
       output file ${config.services.caddy.logDir}/fern_garden.log { mode 0644 }
     '';
-	  extraConfig = ''
-	    reverse_proxy 127.0.0.1:8123
-	  '';
+    extraConfig = ''
+      	    reverse_proxy 127.0.0.1:8123
+      	  '';
   };
 }

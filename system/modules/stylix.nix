@@ -30,22 +30,22 @@
     };
     polarity = "dark";
     fonts = {
-	    monospace = {
-	      package = pkgs.fira-code-nerdfont;
-	      name = "FiraCode Nerd Font";
-	    };
+      monospace = {
+        package = pkgs.fira-code-nerdfont;
+        name = "FiraCode Nerd Font";
+      };
 
-	    emoji = {
-	      package = pkgs.noto-fonts-emoji;
-	      name = "Noto Color Emoji";
-	    };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
 
-	    serif = {
+      serif = {
         package = pkgs.merriweather;
         name = "Merriweather";
       };
 
-	    sansSerif = {
+      sansSerif = {
         package = pkgs.fira-sans;
         name = "Fira Sans";
       };

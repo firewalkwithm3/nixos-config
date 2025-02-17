@@ -1,4 +1,10 @@
-{ inputs, pkgs, config, lib, ... }:
+{
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
   networking.firewall.allowedTCPPorts = [ 443 ];
@@ -13,32 +19,32 @@
   systemd.services.caddy.serviceConfig.EnvironmentFile = [ config.age.secrets.caddy.path ];
 
   systemd.services.caddy.serviceConfig = {
-      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+    AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
   };
 
   services.caddy = {
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.caddy.withPlugins {
-      plugins = [ 
+      plugins = [
         "github.com/caddy-dns/porkbun@v0.2.1"
         "github.com/hslatman/caddy-crowdsec-bouncer@v0.7.2"
       ];
       hash = "sha256-wfko6NGP4I5R0wTyOLJbDtlOboG1qU2DAP84RHoO7FA=";
     };
     globalConfig = ''
-      email admin@fern.garden
+            email admin@fern.garden
 
-      crowdsec {
-        api_url http://127.0.0.1:8091
-        api_key {$CROWDSEC_BOUNCER_API_KEY}
-      }
+            crowdsec {
+              api_url http://127.0.0.1:8091
+              api_key {$CROWDSEC_BOUNCER_API_KEY}
+            }
 
-      auto_https prefer_wildcard
+            auto_https prefer_wildcard
 
-      acme_dns porkbun {
-        api_key {$API_KEY}
-	      api_secret_key {$API_SECRET_KEY}
-      }
+            acme_dns porkbun {
+              api_key {$API_KEY}
+      	      api_secret_key {$API_SECRET_KEY}
+            }
     '';
     virtualHosts."*.ferngarden.net" = {
       logFormat = lib.mkForce ''

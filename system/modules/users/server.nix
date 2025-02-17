@@ -7,7 +7,7 @@
   };
 
   # Groups
-  users.users.fern.extraGroups = [ 
-    "media" 
+  users.users.fern.extraGroups = [
+    "media"
   ];
 }

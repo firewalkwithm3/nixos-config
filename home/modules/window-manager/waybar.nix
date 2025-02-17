@@ -1,4 +1,10 @@
-{ pkgs, lib, osConfig, ... }: let
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
+let
   moduleCfg = {
     "tray" = {
       icon-size = 13;
@@ -19,7 +25,7 @@
         games = "󰊗";
         media = "󰝚";
         chat = "󰭹";
-		    default = "";
+        default = "";
       };
     };
     "network#wifi" = {
@@ -28,7 +34,12 @@
       tooltip-format = "{essid}";
       format = "{icon}";
       format-disconnected = "";
-      format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
+      format-icons = [
+        "󰤟"
+        "󰤢"
+        "󰤥"
+        "󰤨"
+      ];
       on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
     };
     "network#eth" = {
@@ -56,7 +67,11 @@
       tooltip = false;
       format = "{icon} {volume}%";
       format-muted = "󰝟";
-      format-icons = [ "󰕿" "󰖀" "󰕾" ];
+      format-icons = [
+        "󰕿"
+        "󰖀"
+        "󰕾"
+      ];
     };
     "battery#bat0" = {
       bat = "BAT0";
@@ -66,7 +81,18 @@
         warning = 30;
         critical = 15;
       };
-      format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+      format-icons = [
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰂂"
+        "󰁹"
+      ];
       format = "{icon}";
       format-charging = "󰂄";
     };
@@ -78,20 +104,32 @@
         warning = 30;
         critical = 15;
       };
-      format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+      format-icons = [
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰂂"
+        "󰁹"
+      ];
       format = "{icon}";
       format-charging = "󰂄";
     };
   };
-in {
+in
+{
   systemd.user.services.waybar.Unit.After = lib.mkForce [ "graphical-session.target" ];
 
   systemd.user.targets.tray = {
-	  Unit = {
-			Description = "Home Manager System Tray";
-			Requires = [ "graphical-session-pre.target" ];
-		};
-	};
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
 
   programs.waybar = {
     enable = true;
@@ -100,20 +138,36 @@ in {
       laptopDisplay = moduleCfg // {
         layer = "top";
         position = "top";
-        output = 
-          if osConfig.networking.hostName == "garden" then "eDP-1"
-          else if osConfig.networking.hostName == "leaf" then "LVDS-1"
-          else null;
+        output =
+          if osConfig.networking.hostName == "garden" then
+            "eDP-1"
+          else if osConfig.networking.hostName == "leaf" then
+            "LVDS-1"
+          else
+            null;
         modules-left = [ "niri/workspaces" ];
-        modules-right = [ "tray" "idle_inhibitor" "network#wireguard" "network#eth" "network#wifi" "battery#bat0" "battery#bat1" "wireplumber" "clock"];
+        modules-right = [
+          "tray"
+          "idle_inhibitor"
+          "network#wireguard"
+          "network#eth"
+          "network#wifi"
+          "battery#bat0"
+          "battery#bat1"
+          "wireplumber"
+          "clock"
+        ];
       };
       secondaryDisplay = moduleCfg // {
         layer = "top";
         position = "top";
-        output = 
-          if osConfig.networking.hostName == "garden" then "!eDP-1"
-          else if osConfig.networking.hostName == "leaf" then "!LVDS-1"
-          else null;
+        output =
+          if osConfig.networking.hostName == "garden" then
+            "!eDP-1"
+          else if osConfig.networking.hostName == "leaf" then
+            "!LVDS-1"
+          else
+            null;
         modules-left = [ "niri/workspaces" ];
       };
     };

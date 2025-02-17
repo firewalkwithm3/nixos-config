@@ -15,14 +15,38 @@
       "vaultwarden"
     ];
     ensureUsers = [
-      { name = "authentik"; ensureDBOwnership = true; }
-      { name = "forgejo"; ensureDBOwnership = true; }
-      { name = "immich"; ensureDBOwnership = true; }
-      { name = "invidious"; ensureDBOwnership = true; }
-      { name = "matrix-synapse"; ensureDBOwnership = true; }
-      { name = "miniflux"; ensureDBOwnership = true; }
-      { name = "nextcloud"; ensureDBOwnership = true; }
-      { name = "vaultwarden"; ensureDBOwnership = true; }
+      {
+        name = "authentik";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "forgejo";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "immich";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "invidious";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "matrix-synapse";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "miniflux";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "nextcloud";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "vaultwarden";
+        ensureDBOwnership = true;
+      }
     ];
     identMap = ''
       # ArbitraryMapName systemUser DBUser

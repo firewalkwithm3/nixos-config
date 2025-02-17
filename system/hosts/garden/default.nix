@@ -21,12 +21,14 @@
       dns = [ "10.0.1.1" ];
       mtu = 1380;
       privateKeyFile = config.age.secrets.wireguard_garden.path;
-      peers = [{
-        publicKey = "3838nTriit2ZaqnQZykDcQEKsBBDiXPW+DUKretu9RI=";
-        allowedIPs = [ "0.0.0.0/0" ];
-        endpoint = "103.115.191.242:51820";
-        persistentKeepalive = 25;
-      }];
+      peers = [
+        {
+          publicKey = "3838nTriit2ZaqnQZykDcQEKsBBDiXPW+DUKretu9RI=";
+          allowedIPs = [ "0.0.0.0/0" ];
+          endpoint = "103.115.191.242:51820";
+          persistentKeepalive = 25;
+        }
+      ];
     };
   };
 

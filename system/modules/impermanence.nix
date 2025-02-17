@@ -1,5 +1,5 @@
 { options, ... }:
-{  
+{
   environment.persistence."/persist" = {
     enable = true;
     hideMounts = true;
@@ -36,7 +36,9 @@
 
   # /persist need to exist early in boot for ssh keys
   fileSystems."/persist".neededForBoot = true;
-  age.identityPaths = options.age.identityPaths.default ++ [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
+  age.identityPaths = options.age.identityPaths.default ++ [
+    "/persist/etc/ssh/ssh_host_ed25519_key"
+  ];
 
   # Disable sudo lecture
   security.sudo.extraConfig = "Defaults lecture = never";
@@ -44,9 +46,9 @@
   # Rollback service
   boot.initrd.systemd.services.rollback = {
     description = "Rollback BTRFS root subvolume to a pristine state";
-    wantedBy = ["initrd.target"];
-    after = ["systemd-cryptsetup@crypted.service"];
-    before = ["sysroot.mount"];
+    wantedBy = [ "initrd.target" ];
+    after = [ "systemd-cryptsetup@crypted.service" ];
+    before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
     script = ''

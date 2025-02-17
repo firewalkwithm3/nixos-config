@@ -4,7 +4,9 @@
     policies = {
       AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
-      Cookies = { Behaviour = "reject-tracker-and-partition-foreign"; };
+      Cookies = {
+        Behaviour = "reject-tracker-and-partition-foreign";
+      };
       DisableFirefoxAccounts = true;
       DisableFirefoxStudies = true;
       DisableFormHistory = true;
@@ -109,16 +111,16 @@
       ShowHomeButton = false;
     };
     profiles.fern = {
-	    userChrome = ''
-				#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
-				  opacity: 0;
-				  pointer-events: none;
-				}
+      userChrome = ''
+        				#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+        				  opacity: 0;
+        				  pointer-events: none;
+        				}
 
-				#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-				    visibility: collapse !important;
-				}
-	    '';
+        				#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+        				    visibility: collapse !important;
+        				}
+        	    '';
     };
   };
 }
